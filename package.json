@@ -1,0 +1,21 @@
+{
+  "name": "cms-automation",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Tự động hóa biên tập bài viết và đăng tải lên CMS sử dụng Gemini SDK và Puppeteer",
+  "main": "cms_automation.js",
+  "scripts": {
+    "start": "node cms_automation_js.js",
+    "review": "node review_automation_js.js",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "@google/genai": "*",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.2.0",
+    "nodemailer": "^8.0.10",
+    "pdf-parse": "^2.4.5",
+    "puppeteer": "*"
+  }
+}
