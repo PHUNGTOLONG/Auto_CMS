@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CMS Automation Control Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Blobs for Premium Aesthetics -->
+  <div class="blob blob-purple"></div>
+  <div class="blob blob-blue"></div>
+
+  <!-- Auth Container (Login / Register) -->
+  <div class="auth-container" id="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <h2>CMS Auto</h2>
+        <p id="auth-title">Đăng nhập vào hệ thống</p>
+      </div>
+      
+      <form id="auth-form">
+        <div class="form-group">
+          <label for="auth-username">Tên đăng nhập</label>
+          <input type="text" id="auth-username" required placeholder="Nhập tên đăng nhập...">
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Mật khẩu</label>
+          <input type="password" id="auth-password" required placeholder="Nhập mật khẩu...">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" id="btn-auth-submit" style="width: 100%; margin-top: 10px;">Đăng Nhập</button>
+      </form>
+      
+      <div class="auth-footer" style="margin-top: 20px; text-align: center; font-size: 14px;">
+        <span id="auth-switch-text" style="opacity: 0.7;">Chưa có tài khoản?</span>
+        <button class="btn-link" id="btn-auth-switch" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 500; text-decoration: underline;">Đăng ký ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-container" id="app-main-container" style="display: none;">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <h2>CMS Auto</h2>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-item active" data-tab="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          Tổng quan
+        </button>
+        <button class="nav-item" data-tab="files">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Quản lý File
+        </button>
+        <button class="nav-item" data-tab="config">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Cấu hình
+        </button>
+        <button class="nav-item" data-tab="articles">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Bài viết đã duyệt
+        </button>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <div class="user-info-badge">
+          <svg class="user-avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; opacity: 0.8;">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span class="user-name-text" id="user-display-name">Người dùng</span>
+        </div>
+        <div class="status-badge" id="global-status-badge">
+          <span class="status-dot dot-idle"></span>
+          <span class="status-text">Đang rảnh</span>
+        </div>
+        <button class="btn-logout" id="btn-logout" style="margin-top: 10px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Đăng xuất
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Content Area -->
+    <main class="main-content">
+      
+      <!-- TAB 1: DASHBOARD -->
+      <section class="tab-pane active" id="dashboard-pane">
+        <header class="content-header">
+          <h1>Tổng Quan Hệ Thống</h1>
+          <p>Giám sát và vận hành tiến trình tự động hóa đăng bài và kiểm duyệt</p>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon icon-pending">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="stat-details">
+              <h3>File chờ xử lý</h3>
+              <p class="stat-number" id="stat-pending-files">-</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-processed">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-details">
+              <h3>Bài đã biên tập</h3>
+              <p class="stat-number" id="stat-processed-articles">-</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon icon-state">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <div class="stat-details">
+              <h3>Trạng thái Bot</h3>
+              <p class="stat-number text-highlight" id="stat-bot-status">Sẵn sàng</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls & Terminal -->
+        <div class="control-panel-grid">
+          <!-- Automation Actions -->
+          <div class="card action-card">
+            <h2>Hành Động Khởi Chạy</h2>
+            <p class="card-desc">Lựa chọn các tiến trình tự động hóa chạy ngầm dưới nền.</p>
+            
+            <div class="button-group">
+              <button class="btn btn-primary" id="btn-run-editor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Biên tập & Đăng bài
+              </button>
+              <button class="btn btn-secondary" id="btn-run-reviewer">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                Kiểm duyệt CMS
+              </button>
+              <button class="btn btn-danger" id="btn-stop-bot" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/></svg>
+                Dừng tiến trình
+              </button>
+            </div>
+          </div>
+
+          <!-- Real-time Console Log Viewer -->
+          <div class="card terminal-card">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <span class="terminal-title">Console Output Logs</span>
+              <button class="btn-clear-terminal" id="btn-clear-logs">Xóa logs</button>
+            </div>
+            <div class="terminal-body" id="terminal-logs">
+              <div class="log-line system">[Hệ thống] Trình quản trị CMS Automation đã sẵn sàng.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: FILES MANAGEMENT -->
+      <section class="tab-pane" id="files-pane">
+        <header class="content-header">
+          <h1>Quản Lý File Đầu Vào</h1>
+          <p>Xem, thêm, hoặc xóa các văn bản thô để chuẩn bị cho chương trình biên tập</p>
+        </header>
+
+        <div class="files-layout">
+          <!-- Upload Box -->
+          <div class="card upload-card">
+            <h2>Tải File Lên Hệ Thống</h2>
+            <p class="card-desc">Chấp nhận định dạng file <strong>.txt</strong> hoặc <strong>.pdf</strong></p>
+            
+            <div class="dropzone" id="upload-dropzone">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+              </svg>
+              <p>Kéo thả file vào đây hoặc <span>chọn file từ máy tính</span></p>
+              <input type="file" id="file-input" multiple accept=".txt,.pdf" style="display: none;">
+            </div>
+            <div id="upload-progress-list" class="upload-progress-container"></div>
+          </div>
+
+          <!-- File List -->
+          <div class="card file-list-card">
+            <h2>Danh Sách File Chờ Xử Lý</h2>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Tên file</th>
+                    <th>Dung lượng</th>
+                    <th>Ngày thêm</th>
+                    <th style="text-align: right;">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="file-list-tbody">
+                  <!-- JS Render -->
+                  <tr>
+                    <td colspan="4" class="table-empty">Đang tải danh sách file...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: CONFIGURATION -->
+      <section class="tab-pane" id="config-pane">
+        <header class="content-header">
+          <h1>Cấu Hình Hệ Thống</h1>
+          <p>Quản lý tài khoản đăng nhập CMS, API key và địa chỉ trang web mục tiêu</p>
+        </header>
+
+        <div class="card config-card">
+          <form id="config-form">
+            <div class="form-section">
+              <h2>1. Khóa AI & Tài Khoản Cấu Hình</h2>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="cfg-gemini-key">Gemini API Key</label>
+                  <div class="input-password-wrapper">
+                    <input type="password" id="cfg-gemini-key" required placeholder="Nhập khóa API Gemini...">
+                    <button type="button" class="btn-toggle-visibility">
+                      <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                  <small class="helper-text">Khóa API dùng kết nối đến Gemini-2.5-Flash để biên tập bài viết và duyệt lỗi.</small>
+                </div>
+                
+                <div class="form-group">
+                  <label for="cfg-username">Tài khoản đăng nhập CMS</label>
+                  <input type="text" id="cfg-username" required placeholder="admindemo...">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-password">Mật khẩu đăng nhập CMS</label>
+                  <div class="input-password-wrapper">
+                    <input type="password" id="cfg-password" required placeholder="Mật khẩu...">
+                    <button type="button" class="btn-toggle-visibility">
+                      <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="cfg-author">Tên tác giả mặc định</label>
+                  <input type="text" id="cfg-author" required placeholder="AI Editor">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-category">Danh mục bài viết mặc định</label>
+                  <input type="text" id="cfg-category" placeholder="Tin tức" value="Tin tức">
+                </div>
+              </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <div class="form-section">
+              <h2>2. Đường Dẫn Hệ Thống CMS</h2>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="cfg-url-login">URL Đăng Nhập Hệ Thống 1</label>
+                  <input type="url" id="cfg-url-login" required placeholder="https://vpubnd.quangngai.gov.vn/admin">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-url-create">URL Tạo Bài Viết Hệ Thống 1</label>
+                  <input type="url" id="cfg-url-create" placeholder="https://vpubnd.quangngai.gov.vn/page/CMS/Admin/Article/list?...">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-url-login-2">URL Đăng Nhập Hệ Thống 2 (Tùy chọn)</label>
+                  <input type="url" id="cfg-url-login-2" placeholder="https://quangngai.gov.vn/...">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-url-create-2">URL Tạo Bài Viết Hệ Thống 2 (Tùy chọn)</label>
+                  <input type="url" id="cfg-url-create-2" placeholder="https://quangngai.gov.vn/...">
+                </div>
+              </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <div class="form-section">
+              <h2>3. Cấu Hình Báo Cáo Qua Email (Tùy chọn)</h2>
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="cfg-email-sender">Email gửi báo cáo</label>
+                  <input type="email" id="cfg-email-sender" placeholder="vi-du@gmail.com">
+                </div>
+                <div class="form-group">
+                  <label for="cfg-email-password">Mật khẩu ứng dụng Email</label>
+                  <div class="input-password-wrapper">
+                    <input type="password" id="cfg-email-password" placeholder="Mật khẩu ứng dụng 16 ký tự...">
+                    <button type="button" class="btn-toggle-visibility">
+                      <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group full-width">
+                  <label for="cfg-email-receiver">Email nhận báo cáo</label>
+                  <input type="email" id="cfg-email-receiver" placeholder="vi-du-nhan@gmail.com">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="btn-save-config">Lưu cấu hình</button>
+              <button type="button" class="btn btn-secondary" id="btn-reset-config">Hoàn tác</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- TAB 4: ARTICLES LIST -->
+      <section class="tab-pane" id="articles-pane">
+        <header class="content-header">
+          <h1>Bài Viết Đã Biên Tập</h1>
+          <p>Danh sách lưu lịch sử các bài báo đã được biên tập và xuất bản lên hệ thống</p>
+        </header>
+
+        <div class="card articles-list-card">
+          <div class="articles-search-bar">
+            <input type="text" id="article-search-input" placeholder="Tìm kiếm theo tiêu đề hoặc tóm tắt...">
+          </div>
+          
+          <div class="articles-grid" id="articles-grid-container">
+            <!-- JS Rendered Cards -->
+            <div class="table-empty">Đang tải danh sách bài viết...</div>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+
+  <!-- ARTICLE DETAIL MODAL -->
+  <div class="modal" id="article-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modal-title">Tiêu đề bài viết</h2>
+        <button class="modal-close" id="btn-close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <span><strong>Tác giả:</strong> <span id="modal-author">-</span></span>
+          <span><strong>File gốc:</strong> <span id="modal-filename">-</span></span>
+          <span><strong>Ngày đăng:</strong> <span id="modal-date">-</span></span>
+        </div>
+        <div class="modal-brief-container">
+          <h3>Tóm tắt:</h3>
+          <p id="modal-brief">Nội dung tóm tắt ngắn gọn...</p>
+        </div>
+        <div class="modal-body-content">
+          <h3>Nội dung bài báo:</h3>
+          <div id="modal-content-body">Nội dung chi tiết...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
